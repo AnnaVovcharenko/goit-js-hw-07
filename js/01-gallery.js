@@ -12,28 +12,26 @@ function createMrkup(arr) {
 
 container.insertAdjacentHTML('beforeend', createMrkup(galleryItems))
 container.addEventListener('click', handletGalleryClick)
+
 function handletGalleryClick(evt) {
     evt.preventDefault();
     if (!evt.target.classList.contains('gallery__image')) {
         return;
     }
-    console.log(evt.target);
     const picture = evt.target.dataset.source;
     const instance = basicLightbox.create(`
-	<div class = "modal"> <img src="${picture}" alt=""/></div>`)
+    <div class = "modal"> <img src="${picture}" alt=""/></div>`)
+     const modalImage = instance.element().querySelector('img');
     instance.show();
-  
+      modalImage.addEventListener('click', () => {
+        instance.close();
+    });
     container.addEventListener('keydown', (evt) => {
         if (evt.code === "Escape") {
             instance.close();
         }
     });
 }
-
-
-
-console.log(galleryItems);
-//!evt.target === evt.target.closest(".gallery_image")
 
 
 //{
@@ -45,3 +43,23 @@ console.log(galleryItems);
         // },
         // }
         // );
+
+        //function handletGalleryClick(evt) {
+         //   evt.preventDefault();
+           // if (!evt.target.classList.contains('gallery__image')) {
+          ///      return;
+           // }
+          //  console.log(evt.target);
+          //  const picture = evt.target.dataset.source;
+           // const instance = basicLightbox.create(`
+           // <div class = "modal"> <img src="${picture}" alt=""/></div>`)
+           // instance.show();
+          
+           // container.addEventListener('keydown', (evt) => {
+          //      if (evt.code === "Escape") {
+          //          instance.close();
+          //      }
+          //  });
+       // }
+
+
